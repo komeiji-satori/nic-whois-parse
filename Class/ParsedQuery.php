@@ -47,7 +47,7 @@ class ParsedQuery
 	public function parsedResult()
 	{
 		$this->result = [];
-		preg_match("/(>>> Last update of whois database: )(.*)( <<<)/", $this->rawResult, $matches, PREG_OFFSET_CAPTURE);
+		preg_match("/(>>> Last update of whois database: )(.*)( <<<)/i", $this->rawResult, $matches, PREG_OFFSET_CAPTURE);
 		$this->result['last_update'] = trim($matches[2][0]);
 		$split = array_filter(explode("<br>", $this->rawResult));
 
