@@ -1,7 +1,7 @@
 <?php
 //error_reporting(0);
 include './idn.php';
-$whoisservers = json_decode(file_get_contents('./whois-list.json'), true);
+
 
 function LookupDomain($domain) {
 	global $whoisservers;
