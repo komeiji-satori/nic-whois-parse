@@ -2,13 +2,27 @@
 
 require_once "Class/autoload.php";
 
+$result = '';
+
 if (!empty($domain = $_GET["d"])) {
 	$request = new ParsedRequest($domain);
-	//echo $request->getJson();
-	if (!empty($message = $request->getStatus())) {
-		echo $message;
-		die(1);
+
+	if (empty($message = $request->getStatus())) {
+
+		$query = new ParsedQuery($request);
+
+		if ($_GET['raw'] === 'on') {
+			$result = $query->getRawResult();
+		} else {
+			$result = json_encode($query->getParsedResult());
+		}
+
+	} else {
+		$result = $message;
 	}
-	$query = new ParsedQuery($request);
-	echo $query->getRawResult();
+
+	echo $result;
+} else {
+	echo "";
 }
+
